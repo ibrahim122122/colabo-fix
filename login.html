@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Register</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background: #f5f5f5;
+}
+
+header {
+    background: #ff6600;
+    color: white;
+    padding: 20px;
+}
+
+.shop {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.product {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 200px;
+}
+
+.product img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+button {
+    background: #ff6600;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #ff4500;
+}
+
+/* Login Page */
+.login-container {
+    width: 300px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin: 100px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Login or Register</h2>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Enter Username" required>
+            <input type="password" id="password" placeholder="Enter Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p>Not registered? <a href="#" onclick="registerUser()">Click here</a></p>
+    </div>
+
+    <script>
+        function registerUser() {
+            let username = prompt("Enter a new username:");
+            let password = prompt("Enter a new password:");
+            if (username && password) {
+                localStorage.setItem("username", username);
+                localStorage.setItem("password", password);
+                alert("Registration successful! Please log in.");
+            }
+        }
+
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let storedUser = localStorage.getItem("username");
+            let storedPass = localStorage.getItem("password");
+            let inputUser = document.getElementById("username").value;
+            let inputPass = document.getElementById("password").value;
+
+            if (inputUser === storedUser && inputPass === storedPass) {
+                localStorage.setItem("loggedIn", "true");
+                alert("Login successful! Redirecting to the shop...");
+                window.location.href = "shop.html";
+            } else {
+                alert("Invalid username or password!");
+            }
+        });
+    </script>
+</body>
+</html>
